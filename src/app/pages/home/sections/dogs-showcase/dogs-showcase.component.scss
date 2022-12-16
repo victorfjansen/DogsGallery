@@ -1,0 +1,13 @@
+.c-dogs-showcase {
+  &__container {
+    &__title {
+      border-bottom: 2px solid var(--yellow);
+      display: inline-block;
+      transition: 0.2s linear;
+  
+      &:hover {
+        transform: translateX(5px);
+      }
+    }
+  }
+}

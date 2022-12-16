@@ -1,0 +1,35 @@
+.c-hero {
+  &__container {
+    margin: 0 auto;
+    height: 80vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+   &__text-area {
+      width: 100%;
+      max-width: 500px;
+
+      &__title {
+        font-size: var(--font-lg);
+        line-height: 1.2;
+      }
+
+      &__subtitle {
+        margin-top: 10px;
+        font-size: var(--font-md);
+      }
+   }
+
+    &__dog-image {
+      width: 300px;
+      border-radius: 50%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    &__container {
+      flex-direction: column;
+    }
+  }
+}
