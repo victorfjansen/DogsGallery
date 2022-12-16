@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import './styles/_colors.scss';
+@import './styles/font-size';
+
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+}
+
+html[data-theme="light"] {
+  --color-text: var(--onyx);
+  --color-background: var(--base-white);
+}
+
+html[data-theme="dark"] {
+  --color-text: var(--base-white);
+  --color-background: var(--onyx);
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--color-text);
+  background: var(--color-background);
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
