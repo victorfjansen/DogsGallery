@@ -1,1 +1,1 @@
-export * from './dog.model';
+export * from './dog-snackbar.model';
