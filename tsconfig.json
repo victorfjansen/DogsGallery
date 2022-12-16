@@ -24,8 +24,8 @@
       "dom"
     ],
     "types": [
-      "jest"
-    ]
+            "jest"
+        ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: '<router-outlet></router-outlet>',
 })
-export class AppComponent {
-  title = 'F1RST';
+export class AppComponent implements OnInit {
+  ngOnInit(): void {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
 }
