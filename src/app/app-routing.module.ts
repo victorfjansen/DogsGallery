@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DefaultContainerComponent } from './container/default-container/default-container.component';
+import { APP_ROUTES } from './enums';
 
 const routes: Routes = [
   {
@@ -8,9 +9,20 @@ const routes: Routes = [
     component: DefaultContainerComponent,
     children: [
       {
-        path: '',
+        path: APP_ROUTES.HOME,
         loadChildren: () =>
           import('./pages/home/home.module').then((m) => m.HomeModule),
+      },
+      {
+        path: APP_ROUTES.ALL_DOGS,
+        loadChildren: () =>
+          import('./pages/all-dogs/all-dogs.module').then(
+            (m) => m.AllDogsModule
+          ),
+      },
+      {
+        path: '**',
+        redirectTo: APP_ROUTES.HOME,
       },
     ],
   },

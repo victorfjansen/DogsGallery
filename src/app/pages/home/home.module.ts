@@ -1,15 +1,22 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { DogService } from 'src/app/services';
+import { LoadingModule, YellowButtonModule } from 'src/shared';
 
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home.routing.module';
-import { DogsShowcaseComponent } from './sections/dogs-showcase/dogs-showcase.component';
-import { HeroComponent } from './sections/hero/hero.component';
+import { DogsShowcaseComponent } from './components/dogs-showcase/dogs-showcase.component';
 
 @NgModule({
-  declarations: [HeroComponent, HomeComponent, DogsShowcaseComponent],
-  imports: [CommonModule, HomeRoutingModule],
+  declarations: [HomeComponent, DogsShowcaseComponent],
+  imports: [
+    CommonModule,
+    HomeRoutingModule,
+    HttpClientModule,
+    LoadingModule,
+    YellowButtonModule,
+  ],
   providers: [DogService],
 })
 export class HomeModule {}

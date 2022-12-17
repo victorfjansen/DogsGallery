@@ -3,6 +3,8 @@
 @import './styles/_colors.scss';
 @import './styles/font-size';
 
+@import '../node_modules/angular-notifier/styles.scss';
+
 * {
   margin: 0;
   padding: 0;
@@ -11,23 +13,23 @@
 }
 
 html[data-theme="light"] {
-  --color-text: var(--onyx);
-  --color-background: var(--base-white);
+  --primary-color: var(--onyx);
+  --secondary-color: var(--base-white);
 }
 
 html[data-theme="dark"] {
-  --color-text: var(--base-white);
-  --color-background: var(--onyx);
+  --primary-color: var(--base-white);
+  --secondary-color: var(--onyx);
 }
 
 body {
   font-family: 'Poppins', sans-serif;
-  color: var(--color-text);
-  background: var(--color-background);
+  color: var(--primary-color);
+  background: var(--secondary-color);
 }
 
 .container {
-  width: 80%;
+  width: 64%;
   margin: 0 auto;
 }
 

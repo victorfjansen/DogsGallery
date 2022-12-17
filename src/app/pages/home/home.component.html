@@ -1,4 +1,25 @@
 <main class="c-home__content">
-  <home-hero></home-hero>
-  <home-dogs-showcase></home-dogs-showcase>
+  <section>
+    <div class="c-home__container">
+      <div class="c-home__container__text-area">
+        <h1 class="c-home__container__text-area__title">
+          Conheça o novo companheiro do seu lar!
+        </h1>
+        <h2 class="c-home__container__text-area__subtitle">
+          Acolha uma vida e seja feliz
+        </h2>
+      </div>
+      <img
+        src="assets/img/dog-picture.jpg"
+        alt="foto de cachorro feliz"
+        class="c-home__container__dog-image"
+      />
+    </div>
+  </section>
+
+  <home-dogs-showcase
+    [showcaseList]="dogShowcaseList"
+    [selectedDog]="dogShowcaseList[0]"
+    [state]="state"
+  ></home-dogs-showcase>
 </main>
