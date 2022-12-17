@@ -1,14 +1,14 @@
-import { NotifierService } from 'angular-notifier';
 import {
-  Component,
-  ChangeDetectorRef,
-  OnInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
 } from '@angular/core';
+import { NotifierService } from 'angular-notifier';
+import { finalize } from 'rxjs';
 import { PageState } from 'src/app/enums';
 import { DogSnackbarViewModel } from 'src/app/models';
 import { DogService } from 'src/app/services';
-import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
     this.getDogList();
   }
 
-  getDogList(): void {
+  private getDogList(): void {
     this.state = PageState.LOADING;
     this.dogService
       .getDogList()
@@ -44,13 +44,13 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  handleDogSuccess(dogData: DogSnackbarViewModel[]): void {
+  private handleDogSuccess(dogData: DogSnackbarViewModel[]): void {
     if (!dogData.length) this.state = PageState.NO_DATA;
     this.dogShowcaseList = dogData;
     this.state = PageState.DEFAULT;
   }
 
-  handleDogError(error: Error): void {
+  private handleDogError(error: Error): void {
     this.dogShowcaseList = [];
     this.state = PageState.NO_DATA;
     this.notifierService.notify('error', error.message);

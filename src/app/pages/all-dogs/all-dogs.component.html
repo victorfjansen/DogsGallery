@@ -1,7 +1,50 @@
-<main class="c-all-dogs">
-  <section class="c-all-dogs__hero">
-    <h1 class="c-all-dogs__hero__title">Veja todos os dogs aqui!</h1>
+<main>
+  <section class="c-all-dogs" [ngSwitch]="state">
+    <h1 class="c-all-dogs__title">Veja todos os dogs aqui!</h1>
 
-    <div class="c-all-dogs__hero__filters">filter</div>
+    <div class="c-all-dogs__filters">
+      <div class="c-all-dogs__filters__input-container">
+        <p class="c-all-dogs__filters__input-container__label">
+          Busque pelo nome do Dog
+        </p>
+        <input
+          class="c-all-dogs__filters__input-container__input"
+          placeholder="Digite aqui o nome do dog"
+          [formControl]="nameSearchForm"
+        />
+      </div>
+      <select>
+        <option>Aleatório</option>
+        <option>Crescente</option>
+        <option>Decrescente</option>
+      </select>
+    </div>
+
+    <div class="c-all-dogs__no-data" *ngSwitchCase="pageState.NO_DATA">
+      <h1>Ops.. Nenhum dado foi encontrado</h1>
+    </div>
+
+    <ng-container *ngSwitchCase="pageState.LOADING" class="c-all-dogs__loading">
+      <loading-component></loading-component>
+    </ng-container>
+
+    <div class="c-all-dogs__showcase">
+      <div
+        class="c-all-dogs__showcase__container"
+        *ngSwitchCase="pageState.DEFAULT"
+      >
+        <ng-container *ngIf="dogShowcaseByName.length; else defaultResult">
+          <div *ngFor="let dog of dogShowcaseByName; trackBy: dogTrackBy">
+            <dog-card-component [dogObject]="dog"></dog-card-component>
+          </div>
+        </ng-container>
+
+        <ng-template #defaultResult>
+          <div *ngFor="let dog of dogShowcaseList; trackBy: dogTrackBy">
+            <dog-card-component [dogObject]="dog"></dog-card-component>
+          </div>
+        </ng-template>
+      </div>
+    </div>
   </section>
 </main>

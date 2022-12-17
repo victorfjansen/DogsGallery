@@ -11,8 +11,8 @@ export abstract class BaseService {
     return params ? `${this.baseUrl}/${params}` : this.baseUrl;
   }
 
-  protected getQueryParams<T>(parameters: T): unknown {
-    if (!parameters) return null;
+  protected getQueryParams<T>(parameters: T): HttpParams {
+    if (!parameters) return null as unknown as HttpParams;
 
     let params = new HttpParams();
 

@@ -1,0 +1,11 @@
+<div class="c-dog-card">
+  <img [src]="dogObject.imageUrl" />
+  <div class="c-dog-card__text-content">
+    <p class="c-dog-card__text-content__title">
+      {{ dogObject.name }}
+    </p>
+    <p>Expectativa de vida: {{ dogObject.lifeSpan }}</p>
+    <p>Características: {{ dogObject.temperament }}</p>
+    <p>Origem: {{ dogObject.origin || "Não encontrada!" }}</p>
+  </div>
+</div>

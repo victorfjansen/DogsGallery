@@ -1,7 +1,7 @@
 .c-all-dogs {
-  &__hero {
     width: 100%;
     margin-top: 2em;
+    margin-bottom: 2em;
 
     &__title {
       position: relative;
@@ -16,5 +16,50 @@
         left: 0;
       }
     }
-  }
+
+    &__filters {
+      margin-top: 24px;
+      &__input-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        &__label {
+          font-size: var(--font-sm);
+          margin-bottom: 3px;
+        }
+
+        &__input {
+          width: 98%;
+          border: 1px solid var(--yellow);
+          border-radius: 3px;
+          height: 20px;
+          padding: 5px 10px;
+          background-color: var(--secondary-color);
+          color: var(--primary-color);
+        }
+      }
+    }
+
+    &__showcase {
+      width: 100%;
+      display: flex;
+      justify-content: center ;
+      margin-top: 32px;
+
+      &__container {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        row-gap: 30px;
+
+        div {
+          margin: 0 auto;
+        }
+      }
+    }
+
+    &__loading {
+      margin-top: 60px;
+    }
 }
