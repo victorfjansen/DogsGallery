@@ -1,9 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-@import './styles/_colors.scss';
-@import './styles/font-size';
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import "./styles/_colors.scss";
+@import "./styles/font-size";
+@import "./styles/breakpoints";
 
-@import '../node_modules/angular-notifier/styles.scss';
+@import "../node_modules/angular-notifier/styles.scss";
 
 * {
   margin: 0;
@@ -23,7 +24,7 @@ html[data-theme="dark"] {
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   color: var(--primary-color);
   background: var(--secondary-color);
 }
@@ -31,5 +32,8 @@ body {
 .container {
   width: 64%;
   margin: 0 auto;
-}
 
+  @include breakpoint("sm") {
+    width: 80%;
+  }
+}
