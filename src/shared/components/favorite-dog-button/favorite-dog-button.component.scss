@@ -1,0 +1,10 @@
+.c-favorite {
+  &__icon {
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    &__red-heart {
+      color: var(--red);
+    }
+  }
+}
