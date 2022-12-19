@@ -1,0 +1,15 @@
+<modal-component #modal>
+  <div class="c-list-modal">
+    <ng-container *ngIf="dogList.length; else noData">
+      <snackbar-component
+        [withFavButton]="true"
+        *ngFor="let dog of dogList"
+        [dog]="dog"
+      ></snackbar-component>
+    </ng-container>
+
+    <ng-template #noData>
+      <p>Ops.. Nenhum dog favoritado ainda</p>
+    </ng-template>
+  </div>
+</modal-component>

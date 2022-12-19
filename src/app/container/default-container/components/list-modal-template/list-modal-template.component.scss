@@ -1,0 +1,33 @@
+@import "/src/styles/breakpoints";
+
+.c-list-modal {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  max-height: 500px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 3px;
+
+    &-track {
+      background-color: transparent;
+    }
+
+    &-thumb {
+      background-color: var(--base-white);
+      border-radius: 30px;
+      border-left: 9px var(--primary-color) solid;
+      background-clip: padding-box;
+      &:hover {
+        background-color: #333;
+      }
+    }
+  }
+
+  @include breakpoint("sm") {
+    width: 300px;
+  }
+}
