@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { DogSnackbarViewModel } from 'src/app/models';
+import { Component, Input, ViewChild } from '@angular/core';
+import { DogViewModel } from 'src/app/models';
+import { DogModalTemplateComponent } from '../dog-modal-template/dog-modal-template.component';
 
 @Component({
   selector: 'dog-card-component',
@@ -7,7 +8,8 @@ import { DogSnackbarViewModel } from 'src/app/models';
   styleUrls: ['./dog-card.component.scss'],
 })
 export class DogCardComponent {
-  @Input() dogObject: DogSnackbarViewModel;
+  @ViewChild('modal') modal: DogModalTemplateComponent | undefined;
+  @Input() dogObject: DogViewModel;
 
   constructor() {
     this.dogObject = {
@@ -17,5 +19,9 @@ export class DogCardComponent {
       origin: '',
       temperament: '',
     };
+  }
+
+  handleOpenModal(dog: DogViewModel): void {
+    this.modal?.toggleVisibility(dog);
   }
 }

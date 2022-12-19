@@ -1,11 +1,19 @@
 <div class="c-dog-card">
   <img [src]="dogObject.imageUrl" />
   <div class="c-dog-card__text-content">
-    <p class="c-dog-card__text-content__title">
+    <p
+      class="c-dog-card__text-content__title"
+      (click)="handleOpenModal(dogObject)"
+    >
       {{ dogObject.name }}
     </p>
     <p>Expectativa de vida: {{ dogObject.lifeSpan }}</p>
     <p>Características: {{ dogObject.temperament }}</p>
     <p>Origem: {{ dogObject.origin || "Não encontrada!" }}</p>
   </div>
+  <div class="c-dog-card__favorite-button">
+    <favorite-button-component [dog]="dogObject"></favorite-button-component>
+  </div>
 </div>
+
+<dog-modal-template #modal [selectedDog]="dogObject"></dog-modal-template>

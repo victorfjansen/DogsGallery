@@ -1,0 +1,27 @@
+<modal-component #modal>
+  <div class="c-dog-modal__container">
+    <img
+      [src]="selectedDog.imageUrl"
+      alt="dog photo"
+      class="c-dog-modal__container__image"
+    />
+    <div class="c-dog-modal__container__text-content">
+      <div>
+        <h1 class="c-dog-modal__container__text-content__title">
+          {{ selectedDog.name }}
+        </h1>
+      </div>
+      <div class="c-dog-modal__container__text-content__favorite-container">
+        <p
+          class="c-dog-modal__container__text-content__favorite-container__text"
+          *ngIf="isFavorite"
+        >
+          Adicionado como favorito!
+        </p>
+        <favorite-button-component
+          [dog]="selectedDog"
+        ></favorite-button-component>
+      </div>
+    </div>
+  </div>
+</modal-component>

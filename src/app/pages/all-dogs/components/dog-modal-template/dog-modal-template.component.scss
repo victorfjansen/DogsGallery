@@ -1,0 +1,49 @@
+@import "/src/styles/breakpoints";
+
+.c-dog-modal {
+  &__container {
+    width: 100%;
+    max-width: 800px;
+    height: 100%;
+    max-height: 700px;
+    display: flex;
+
+    &__image {
+      width: 80%;
+      max-height: 500px;
+      object-fit: cover;
+    }
+
+    &__text-content {
+      padding: 1em;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      &__title {
+        font-size: var(--font-md);
+      }
+
+      &__favorite-container {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
+        &__text {
+          font-size: var(--font-sm);
+        }
+      }
+    }
+
+    @include breakpoint("sm") {
+      flex-direction: column;
+
+      &__image {
+        width: 100%;
+        max-height: 500px;
+        object-fit: cover;
+      }
+    }
+  }
+}
