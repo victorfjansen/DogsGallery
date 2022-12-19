@@ -2,15 +2,19 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  OnDestroy,
   OnInit,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { NotifierService } from 'angular-notifier';
-import { finalize } from 'rxjs';
+import { finalize, Subject, takeUntil } from 'rxjs';
 import { PageState } from 'src/app/enums';
-import { DogSnackbarViewModel } from 'src/app/models';
+import {
+  DogRequestParams,
+  DogViewModel,
+  PaginationOptions,
+} from 'src/app/models';
 import { DogService } from 'src/app/services';
-import { Subject, takeUntil, filter, debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-all-dogs',
@@ -18,14 +22,15 @@ import { Subject, takeUntil, filter, debounceTime } from 'rxjs';
   styleUrls: ['./all-dogs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AllDogsComponent implements OnInit {
+export class AllDogsComponent implements OnInit, OnDestroy {
   state: PageState;
   pageState: typeof PageState;
 
   nameSearchForm: FormControl<string>;
+  paginationOptions: PaginationOptions;
 
-  dogShowcaseList: DogSnackbarViewModel[];
-  dogShowcaseByName: DogSnackbarViewModel[];
+  dogShowcaseList: DogViewModel[];
+  dogShowcaseByName: DogViewModel[];
 
   unsubscribe$: Subject<void>;
 
@@ -38,42 +43,60 @@ export class AllDogsComponent implements OnInit {
     this.dogShowcaseList = [];
     this.dogShowcaseByName = [];
     this.pageState = PageState;
+    this.paginationOptions = {
+      current: 1,
+      total: 11,
+    };
     this.nameSearchForm = new FormControl();
     this.unsubscribe$ = new Subject();
   }
 
   ngOnInit(): void {
-    this.getDogList();
+    this.getDogList(this.paginationOptions);
     this.handleNameSearch();
   }
 
-  protected dogTrackBy(_: number, dog: DogSnackbarViewModel): string {
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
+  dogTrackBy(_: number, dog: DogViewModel): string {
     return dog.name;
+  }
+
+  handleChangePage(event: number): void {
+    this.paginationOptions.current = event;
+    this.getDogList(this.paginationOptions);
   }
 
   private handleNameSearch(): void {
     this.nameSearchForm.valueChanges
-      .pipe(
-        takeUntil(this.unsubscribe$),
-        filter((value) => value.length > 2 || !value.length),
-        debounceTime(1000)
-      )
+      .pipe(takeUntil(this.unsubscribe$))
       .subscribe({
         next: this.filterByName.bind(this),
       });
   }
 
-  private filterByName(value: string): void {
-    this.dogShowcaseByName = this.dogShowcaseList.filter((dog) =>
-      dog.name.toLowerCase().trim().includes(value.toLowerCase().trim())
-    );
-    this.changeDetectorRef.detectChanges();
+  private trimString(value: string): string {
+    return value.toLowerCase().trim();
   }
 
-  private getDogList(): void {
+  private filterByName(value: string): void {
+    this.dogShowcaseByName = this.dogShowcaseList.filter((dog) =>
+      this.trimString(dog.name).includes(this.trimString(value))
+    );
+    if (!value.length) this.dogShowcaseByName = [];
+  }
+
+  private getDogList(paginationOptions: PaginationOptions): void {
+    const params: DogRequestParams | undefined = paginationOptions
+      ? { page: paginationOptions.current, limit: 15 }
+      : undefined;
+
     this.state = PageState.LOADING;
     this.dogService
-      .getDogList()
+      .getDogList(params)
       .pipe(finalize(() => this.changeDetectorRef.detectChanges()))
       .subscribe({
         next: this.handleDogSuccess.bind(this),
@@ -81,7 +104,7 @@ export class AllDogsComponent implements OnInit {
       });
   }
 
-  private handleDogSuccess(dogData: DogSnackbarViewModel[]): void {
+  private handleDogSuccess(dogData: DogViewModel[]): void {
     if (!dogData.length) this.state = PageState.NO_DATA;
     this.dogShowcaseList = dogData;
     this.state = PageState.DEFAULT;

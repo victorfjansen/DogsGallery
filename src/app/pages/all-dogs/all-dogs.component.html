@@ -13,11 +13,6 @@
           [formControl]="nameSearchForm"
         />
       </div>
-      <select>
-        <option>Aleatório</option>
-        <option>Crescente</option>
-        <option>Decrescente</option>
-      </select>
     </div>
 
     <div class="c-all-dogs__no-data" *ngSwitchCase="pageState.NO_DATA">
@@ -33,10 +28,19 @@
         class="c-all-dogs__showcase__container"
         *ngSwitchCase="pageState.DEFAULT"
       >
-        <ng-container *ngIf="dogShowcaseByName.length; else defaultResult">
-          <div *ngFor="let dog of dogShowcaseByName; trackBy: dogTrackBy">
-            <dog-card-component [dogObject]="dog"></dog-card-component>
+        <ng-container *ngIf="nameSearchForm.value; else defaultResult">
+          <div
+            class="c-all-dogs__no-data"
+            *ngIf="!dogShowcaseByName.length; else templateNameWithData"
+          >
+            <h1>Ops.. Nenhum dado foi encontrado</h1>
           </div>
+
+          <ng-template #templateNameWithData>
+            <div *ngFor="let dog of dogShowcaseByName; trackBy: dogTrackBy">
+              <dog-card-component [dogObject]="dog"></dog-card-component>
+            </div>
+          </ng-template>
         </ng-container>
 
         <ng-template #defaultResult>
@@ -45,6 +49,19 @@
           </div>
         </ng-template>
       </div>
+    </div>
+    <div
+      class="c-all-dogs__pagination-container"
+      *ngIf="state === pageState.DEFAULT"
+    >
+      <paginate-component
+        *ngIf="!dogShowcaseByName.length"
+        [current]="paginationOptions.current"
+        [total]="paginationOptions.total"
+        (next)="handleChangePage($event)"
+        (previous)="handleChangePage($event)"
+        (goTo)="handleChangePage($event)"
+      ></paginate-component>
     </div>
   </section>
 </main>

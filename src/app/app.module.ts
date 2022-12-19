@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NotifierModule } from 'angular-notifier';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +14,7 @@ import { DefaultContainerModule } from './container/default-container/default-co
     AppRoutingModule,
     DefaultContainerModule,
     NotifierModule,
+    FontAwesomeModule,
   ],
   bootstrap: [AppComponent],
 })
