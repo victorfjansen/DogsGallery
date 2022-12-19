@@ -1,0 +1,46 @@
+<div class="c-pagination">
+  <nav aria-label="pagination" class="c-pagination__nav">
+    <ul>
+      <li>
+        <button
+          aria-label="Ir para página anterior"
+          [attr.aria-disabled]="current === 1"
+          [disabled]="current === 1"
+          (click)="onPrevious()"
+          class="c-pagination__nav__button"
+        >
+          Voltar
+        </button>
+      </li>
+      <li *ngFor="let page of pages; let i = index">
+        <a
+          *ngIf="page !== -1; else more"
+          class="internal"
+          [attr.aria-current]="page === current ? 'page' : null"
+          [attr.aria-label]="
+            page === current ? 'Página atual' + page : 'Ir para página ' + page
+          "
+          [class.current]="page === current"
+          tabindex="0"
+          (click)="onGoTo(page)"
+          (keyup.enter)="onGoTo(page)"
+          >{{ page }}</a
+        >
+        <ng-template #more>
+          <a class="more"> ... </a>
+        </ng-template>
+      </li>
+      <li>
+        <button
+          aria-label="Ir para pr[oxima página"
+          [attr.aria-disabled]="current === total"
+          [disabled]="current === total"
+          (click)="onNext()"
+          class="c-pagination__nav__button"
+        >
+          Próximo
+        </button>
+      </li>
+    </ul>
+  </nav>
+</div>
