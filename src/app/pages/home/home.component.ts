@@ -7,7 +7,7 @@ import {
 import { NotifierService } from 'angular-notifier';
 import { finalize } from 'rxjs';
 import { PageState } from 'src/app/enums';
-import { DogSnackbarViewModel } from 'src/app/models';
+import { DogViewModel } from 'src/app/models';
 import { DogService } from 'src/app/services';
 
 @Component({
@@ -18,7 +18,7 @@ import { DogService } from 'src/app/services';
 })
 export class HomeComponent implements OnInit {
   state: PageState;
-  dogShowcaseList: DogSnackbarViewModel[];
+  dogShowcaseList: DogViewModel[];
 
   constructor(
     private dogService: DogService,
@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  private handleDogSuccess(dogData: DogSnackbarViewModel[]): void {
+  private handleDogSuccess(dogData: DogViewModel[]): void {
     if (!dogData.length) this.state = PageState.NO_DATA;
     this.dogShowcaseList = dogData;
     this.state = PageState.DEFAULT;

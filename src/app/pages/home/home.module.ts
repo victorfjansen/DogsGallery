@@ -2,7 +2,12 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { DogService } from 'src/app/services';
-import { LoadingModule, YellowButtonModule } from 'src/shared';
+import {
+  FavoriteButtonModule,
+  LoadingModule,
+  SnakcbarModule,
+  YellowButtonModule,
+} from 'src/shared';
 
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home.routing.module';
@@ -16,6 +21,8 @@ import { DogsShowcaseComponent } from './components/dogs-showcase/dogs-showcase.
     HttpClientModule,
     LoadingModule,
     YellowButtonModule,
+    FavoriteButtonModule,
+    SnakcbarModule,
   ],
   providers: [DogService],
 })

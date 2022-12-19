@@ -1,8 +1,9 @@
+@import "/src/styles/breakpoints";
+
 .c-home {
   &__content {
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
   }
 
   &__container {
@@ -12,7 +13,7 @@
     justify-content: space-between;
     align-items: center;
 
-   &__text-area {
+    &__text-area {
       width: 100%;
       max-width: 500px;
 
@@ -25,7 +26,7 @@
         margin-top: 10px;
         font-size: var(--font-md);
       }
-   }
+    }
 
     &__dog-image {
       width: 300px;
@@ -33,10 +34,28 @@
     }
   }
 
-  @media (max-width: 600px) {
+  @include breakpoint("md") {
     &__container {
+      margin-top: 96px;
       flex-direction: column;
+
+      &__text-area {
+        &__title {
+          font-size: var(--font-lg);
+        }
+
+        &__subtitle {
+          font-size: var(--font-sm);
+        }
+      }
+
+      &__dog-image {
+        margin-top: 96px;
+      }
+    }
+
+    &__dog-showcase {
+      margin-top: 96px;
     }
   }
-  
 }
