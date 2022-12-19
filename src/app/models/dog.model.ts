@@ -1,4 +1,4 @@
-export interface DogSnackbarViewModel {
+export interface DogViewModel {
   imageUrl: string;
   name: string;
   lifeSpan: string;

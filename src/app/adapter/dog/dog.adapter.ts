@@ -1,8 +1,8 @@
 import { DogDto } from 'src/app/dto';
-import { DogSnackbarViewModel } from 'src/app/models';
+import { DogViewModel } from 'src/app/models';
 
 export class DogAdapter {
-  static getDogSnackbarData(dogDto: DogDto[]): DogSnackbarViewModel[] {
+  static getDogSnackbarData(dogDto: DogDto[]): DogViewModel[] {
     return [...dogDto].map((dog) => {
       return {
         name: dog.name,
