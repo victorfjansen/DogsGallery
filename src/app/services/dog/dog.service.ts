@@ -3,12 +3,14 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { DogAdapter } from 'src/app/adapter';
 import { DogDto } from 'src/app/dto';
-import { DogRequestParams, DogSnackbarViewModel } from 'src/app/models';
+import { DogRequestParams, DogViewModel } from 'src/app/models';
+
 import { BaseService } from '../base/base.service';
 
 @Injectable()
 export class DogService extends BaseService {
-  authHeader: { [key: string]: string };
+  private authHeader: { [key: string]: string };
+
   constructor(private httpClient: HttpClient) {
     super('https://api.thedogapi.com/v1');
 
@@ -18,16 +20,14 @@ export class DogService extends BaseService {
     };
   }
 
-  getDogList(
-    parameters?: DogRequestParams
-  ): Observable<DogSnackbarViewModel[]> {
+  getDogList(parameters?: DogRequestParams): Observable<DogViewModel[]> {
     const defaultParams: DogRequestParams = {
-      page: 0,
-      limit: 20,
+      page: 1,
+      limit: 15,
     };
 
     const params = parameters
-      ? this.getQueryParams(parameters)
+      ? this.getQueryParams({ ...parameters })
       : this.getQueryParams(defaultParams);
 
     return this.httpClient

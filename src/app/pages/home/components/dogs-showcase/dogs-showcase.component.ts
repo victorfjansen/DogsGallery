@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { DogSnackbarViewModel } from 'src/app/models';
+import { DogViewModel } from 'src/app/models';
 import { Router } from '@angular/router';
 import { APP_ROUTES, PageState } from 'src/app/enums';
 
@@ -10,8 +10,8 @@ import { APP_ROUTES, PageState } from 'src/app/enums';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DogsShowcaseComponent {
-  @Input() showcaseList: DogSnackbarViewModel[];
-  @Input() selectedDog: DogSnackbarViewModel;
+  @Input() showcaseList: DogViewModel[];
+  @Input() selectedDog: DogViewModel;
   @Input() state: PageState;
 
   pageState: typeof PageState;
