@@ -1,0 +1,39 @@
+.c-snackbar {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  border-radius: 3px;
+  max-height: min-content;
+  padding-right: 8px;
+
+  div {
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 50px;
+      max-height: 40px;
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+      object-fit: cover;
+    }
+
+    p {
+      margin-left: 20px;
+      font-size: var(--font-sm);
+    }
+  }
+
+  &__arrow-img {
+    width: 16px;
+    margin-right: 20px;
+  }
+
+  &:hover {
+    background-color: darken($color: #fff, $amount: 10);
+    cursor: pointer;
+  }
+}

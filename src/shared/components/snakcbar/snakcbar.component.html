@@ -1,0 +1,14 @@
+<div class="c-snackbar" (click)="clickEvent.emit()">
+  <div>
+    <img [src]="dog.imageUrl" />
+    <p>{{ dog.name }}</p>
+  </div>
+
+  <ng-container *ngIf="!withFavButton; else favButton">
+    <img src="assets/img/seta.png" class="c-snackbar__arrow-img" />
+  </ng-container>
+
+  <ng-template #favButton>
+    <favorite-button-component [dog]="dog"></favorite-button-component>
+  </ng-template>
+</div>
