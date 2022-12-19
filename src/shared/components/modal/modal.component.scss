@@ -1,0 +1,26 @@
+.c-modal {
+  &__component {
+    background: var(--secondary-color);
+    box-shadow: 0 2px 8px var(--primary-color);
+    border-radius: 3px;
+    min-width: 320px;
+    min-height: 200px;
+    max-height: 700px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 11;
+  }
+
+  &__overlay {
+    background: #000;
+    height: 100vh;
+    left: 0;
+    opacity: 0.5;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    z-index: 10;
+  }
+}

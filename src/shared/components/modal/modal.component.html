@@ -1,0 +1,10 @@
+<ng-container *ngIf="visible">
+  <div class="c-modal__component">
+    <ng-content></ng-content>
+  </div>
+  <div
+    (click)="toggleVisibility()"
+    class="c-modal__overlay"
+    (keydown.esc)="toggleVisibility()"
+  ></div>
+</ng-container>
