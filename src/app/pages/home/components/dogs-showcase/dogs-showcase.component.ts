@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { DogViewModel } from 'src/app/models';
+import { DogViewModel } from 'src/shared/models';
 import { Router } from '@angular/router';
 import { APP_ROUTES, PageState } from 'src/app/enums';
 
@@ -25,7 +25,6 @@ export class DogsShowcaseComponent {
 
   protected changeCurrentDog(index: number): void {
     this.selectedDog = this.showcaseList[index];
-    console.log(this.showcaseList[index]);
   }
 
   protected navigateTo(): void {

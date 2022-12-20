@@ -1,5 +1,6 @@
+import { FavoriteDogStore } from '../../store';
+import { DogViewModel } from '../../models';
 import {
-  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   Input,
@@ -9,8 +10,6 @@ import {
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { NotifierService } from 'angular-notifier';
 import { Subject, takeUntil } from 'rxjs';
-import { DogViewModel } from 'src/app/models';
-import { FavoriteDogStore } from 'src/shared/store';
 
 @Component({
   selector: 'favorite-button-component',
@@ -80,7 +79,6 @@ export class FavoriteButtonComponent implements OnDestroy, OnChanges {
       (storeDog) => storeDog.name === this.dog.name
     );
 
-    console.log(hasFavorite, 'aqui');
     hasFavorite.length
       ? (this.isDogFavorite = true)
       : (this.isDogFavorite = false);

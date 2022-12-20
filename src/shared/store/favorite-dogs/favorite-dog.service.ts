@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { DogViewModel } from 'src/app/models';
+import { DogViewModel } from 'src/shared/models';
 
 @Injectable({
   providedIn: `root`,
@@ -27,7 +27,6 @@ export class FavoriteDogStore {
 
     const parsedData: DogViewModel[] = JSON.parse(currentData);
     const filterData = parsedData.filter((localDog) => localDog.name !== name);
-    console.log(filterData);
 
     localStorage.setItem(this.localStorageName, JSON.stringify(filterData));
     this.favoriteDogStore$.next(filterData);

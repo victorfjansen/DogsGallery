@@ -1,3 +1,8 @@
+import { DogRequestParams } from '../../../shared/models/dog-request-params.model';
+import { PaginationOptions } from '../../../shared/models/pagination-options.model';
+import { DogService } from './../../services/dog/dog.service';
+import { DogViewModel } from '../../../shared/models/dog.model';
+import { PageState } from './../../enums/page-state.enum';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -8,13 +13,6 @@ import {
 import { FormControl } from '@angular/forms';
 import { NotifierService } from 'angular-notifier';
 import { finalize, Subject, takeUntil } from 'rxjs';
-import { PageState } from 'src/app/enums';
-import {
-  DogRequestParams,
-  DogViewModel,
-  PaginationOptions,
-} from 'src/app/models';
-import { DogService } from 'src/app/services';
 
 @Component({
   selector: 'app-all-dogs',

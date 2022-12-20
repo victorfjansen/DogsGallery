@@ -1,5 +1,5 @@
 import { DogDto } from 'src/app/dto';
-import { DogViewModel } from 'src/app/models';
+import { DogViewModel } from 'src/shared/models';
 
 export class DogAdapter {
   static getDogSnackbarData(dogDto: DogDto[]): DogViewModel[] {

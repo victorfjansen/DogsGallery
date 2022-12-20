@@ -58,9 +58,7 @@
         *ngIf="!dogShowcaseByName.length"
         [current]="paginationOptions.current"
         [total]="paginationOptions.total"
-        (next)="handleChangePage($event)"
-        (previous)="handleChangePage($event)"
-        (goTo)="handleChangePage($event)"
+        (changePageEvent)="handleChangePage($event)"
       ></paginate-component>
     </div>
   </section>

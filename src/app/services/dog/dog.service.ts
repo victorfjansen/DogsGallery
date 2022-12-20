@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { DogAdapter } from 'src/app/adapter';
 import { DogDto } from 'src/app/dto';
-import { DogRequestParams, DogViewModel } from 'src/app/models';
+import { DogRequestParams, DogViewModel } from 'src/shared/models';
 
 import { BaseService } from '../base/base.service';
 

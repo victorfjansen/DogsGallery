@@ -7,7 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-import { DogViewModel } from 'src/app/models';
+import { DogViewModel } from 'src/shared/models';
 import { FavoriteDogStore } from 'src/shared';
 import { ModalComponent } from 'src/shared/components/modal/modal.component';
 

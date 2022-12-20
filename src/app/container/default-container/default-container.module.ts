@@ -1,8 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SnakcbarModule, YellowButtonModule } from 'src/shared';
-import { ModalModule } from 'src/shared/components/modal/modal.module';
+import {
+  SnakcbarModule,
+  YellowButtonModule,
+  ModalModule,
+} from '../../../shared';
 
 import { HeaderComponent } from './components/header/header.component';
 import { ListModalTemplateComponent } from './components/list-modal-template/list-modal-template.component';

@@ -3,11 +3,9 @@
     <ul>
       <li>
         <button
-          aria-label="Ir para página anterior"
-          [attr.aria-disabled]="current === 1"
           [disabled]="current === 1"
-          (click)="onPrevious()"
-          class="c-pagination__nav__button"
+          (click)="changePageEvent.emit(current - 1)"
+          class="c-pagination__nav__button c-pagination__prev-button"
         >
           Voltar
         </button>
@@ -15,15 +13,11 @@
       <li *ngFor="let page of pages; let i = index">
         <a
           *ngIf="page !== -1; else more"
-          class="internal"
-          [attr.aria-current]="page === current ? 'page' : null"
-          [attr.aria-label]="
-            page === current ? 'Página atual' + page : 'Ir para página ' + page
-          "
+          class="internal c-pagination__mid-button"
           [class.current]="page === current"
           tabindex="0"
-          (click)="onGoTo(page)"
-          (keyup.enter)="onGoTo(page)"
+          (click)="changePageEvent.emit(page)"
+          (keyup.enter)="changePageEvent.emit(page)"
           >{{ page }}</a
         >
         <ng-template #more>
@@ -32,11 +26,9 @@
       </li>
       <li>
         <button
-          aria-label="Ir para pr[oxima página"
-          [attr.aria-disabled]="current === total"
           [disabled]="current === total"
-          (click)="onNext()"
-          class="c-pagination__nav__button"
+          (click)="changePageEvent.emit(current + 1)"
+          class="c-pagination__nav__button c-pagination__next-button"
         >
           Próximo
         </button>

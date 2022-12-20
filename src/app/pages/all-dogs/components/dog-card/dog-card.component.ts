@@ -1,5 +1,5 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { DogViewModel } from 'src/app/models';
+import { DogViewModel } from 'src/shared/models';
 import { DogModalTemplateComponent } from '../dog-modal-template/dog-modal-template.component';
 
 @Component({

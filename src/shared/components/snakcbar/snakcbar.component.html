@@ -1,3 +1,4 @@
+<!-- Quando o componente for clicado ele emitirá um evento para o componente pai -->
 <div class="c-snackbar" (click)="clickEvent.emit()">
   <div>
     <img [src]="dog.imageUrl" />
@@ -9,6 +10,9 @@
   </ng-container>
 
   <ng-template #favButton>
-    <favorite-button-component [dog]="dog"></favorite-button-component>
+    <favorite-button-component
+      [dog]="dog"
+      class="c-snackbar__fav-button"
+    ></favorite-button-component>
   </ng-template>
 </div>

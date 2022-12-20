@@ -7,7 +7,7 @@ import {
 import { NotifierService } from 'angular-notifier';
 import { finalize } from 'rxjs';
 import { PageState } from 'src/app/enums';
-import { DogViewModel } from 'src/app/models';
+import { DogViewModel } from 'src/shared/models';
 import { DogService } from 'src/app/services';
 
 @Component({

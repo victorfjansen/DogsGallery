@@ -8,31 +8,33 @@ import {
   SimpleChanges,
 } from '@angular/core';
 
+//apresenta componente com o método OnPush para renderizar somente quando as propriedades de input forem alteradas
 @Component({
   selector: 'paginate-component',
   templateUrl: './paginate.component.html',
   styleUrls: ['./paginate.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+//implementa o onChanges pra verificar todas as mudanças relativas a ele e renderizar quando houverem mudanças
 export class PaginateComponent implements OnChanges {
-  @Input() current;
-  @Input() total;
+  //declara instancias de entrada e saída
+  @Input() current: number;
+  @Input() total: number;
 
-  @Output() goTo: EventEmitter<number>;
-  @Output() next: EventEmitter<number>;
-  @Output() previous: EventEmitter<number>;
+  @Output() changePageEvent: EventEmitter<number>;
+
+  pages: number[] = [];
 
   constructor() {
+    //declara valores default pra cada instancia
     this.current = 0;
     this.total = 0;
+    this.pages = [];
 
-    this.goTo = new EventEmitter();
-    this.next = new EventEmitter();
-    this.previous = new EventEmitter();
+    this.changePageEvent = new EventEmitter();
   }
 
-  public pages: number[] = [];
-
+  //ativa o ciclo de detecção pra quando houver mudança nas propriedades input ele recalcular a quantidade de páginas disponíveis
   ngOnChanges(changes: SimpleChanges): void {
     if (
       (changes['current'] && changes['current'].currentValue) ||
@@ -42,18 +44,7 @@ export class PaginateComponent implements OnChanges {
     }
   }
 
-  public onGoTo(page: number): void {
-    this.goTo.emit(page);
-  }
-
-  public onNext(): void {
-    this.next.emit(this.current + 1);
-  }
-
-  public onPrevious(): void {
-    this.previous.next(this.current - 1);
-  }
-
+  // logica pra conseguir pegar as paginas disponiveis a partir do numero total de paginas passadas e da pagina atual
   private getPages(current: number, total: number): number[] {
     if (total <= 7) {
       return [...Array(total).keys()].map((x) => ++x);
