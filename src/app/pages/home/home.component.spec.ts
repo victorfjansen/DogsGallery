@@ -17,6 +17,7 @@ import { DogsShowcaseComponent } from './components/dogs-showcase/dogs-showcase.
 import { HomeComponent } from './home.component';
 import { of, throwError } from 'rxjs';
 import { NOTIFIER_TYPES, PageState } from '../../enums';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -35,6 +36,7 @@ describe('HomeComponent', () => {
         FavoriteButtonModule,
         SnakcbarModule,
         NotifierModule,
+        NoopAnimationsModule,
       ],
       providers: [
         {

@@ -106,7 +106,7 @@ export class AllDogsComponent implements OnInit, OnDestroy {
     if (!value.length) this.dogShowcaseByName = [];
   }
 
-  // pega a lsita de dogs administrando os parâmetros que vierem
+  // pega a LISTA de dogs administrando os parâmetros que vierem
   private getDogList(paginationOptions: PaginationOptions): void {
     const params: DogRequestParams | undefined = paginationOptions
       ? { page: paginationOptions.current, limit: 15 }

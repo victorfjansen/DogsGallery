@@ -12,9 +12,6 @@ import { fadeSlideIn } from 'src/shared/animations';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('fade', [transition('void => *', useAnimation(fadeSlideIn))]),
-  ],
 })
 export class ModalComponent {
   visible: boolean;

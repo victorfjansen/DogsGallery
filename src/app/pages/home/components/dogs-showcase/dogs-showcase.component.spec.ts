@@ -15,6 +15,7 @@ import { DogsShowcaseComponent } from './dogs-showcase.component';
 import { NotifierModule } from 'angular-notifier';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AllDogsComponent } from '../../../all-dogs/all-dogs.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('DogsShowcaseComponent', () => {
   let component: DogsShowcaseComponent;
@@ -31,6 +32,7 @@ describe('DogsShowcaseComponent', () => {
         YellowButtonModule,
         NotifierModule,
         SnakcbarModule,
+        NoopAnimationsModule,
         RouterTestingModule.withRoutes([
           { path: APP_ROUTES.ALL_DOGS, component: AllDogsComponent },
           { path: '**', redirectTo: APP_ROUTES.ALL_DOGS },

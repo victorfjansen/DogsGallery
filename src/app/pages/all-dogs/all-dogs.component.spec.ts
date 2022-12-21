@@ -2,6 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NotifierModule, NotifierService } from 'angular-notifier';
 import { throwError } from 'rxjs';
 import {
@@ -41,6 +42,7 @@ describe('AllDogsComponent', () => {
         ModalModule,
         FavoriteButtonModule,
         NotifierModule,
+        NoopAnimationsModule,
       ],
       providers: [
         {
@@ -122,7 +124,6 @@ describe('AllDogsComponent', () => {
 
   it(`${AllDogsComponent.name} should display default content and default results when pageState is ${PageState.DEFAULT} and nameSearchValue has no data`, () => {
     component.state = PageState.DEFAULT;
-    component.dogShowcaseList = [mockedDog];
     runOnPushDetectChanges(fixture);
 
     const defaultResult = fixture.debugElement.query(
