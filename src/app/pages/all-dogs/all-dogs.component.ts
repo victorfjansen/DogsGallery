@@ -101,9 +101,9 @@ export class AllDogsComponent implements OnInit, OnDestroy {
   // lógica pra filtrar pelo nome e adicionar num novo array
   private handleFilterNameChanges(value: string): void {
     !(this.dogShowcaseList.length > 20) && this.getDogList({ limit: 160 });
-    !value.length && this.resetShowCase();
-
     this.dogShowcaseList.length > 20 && this.filterByName(value);
+
+    !value.length && this.resetShowCase();
   }
 
   private resetShowCase(): void {
