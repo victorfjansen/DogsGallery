@@ -1,3 +1,4 @@
+import { NOTIFIER_TYPES } from './../../../../enums/notify.enum';
 import { NotifierModule, NotifierService } from 'angular-notifier';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -26,7 +27,7 @@ describe('ListModalTemplateComponent', () => {
         {
           provide: NotifierService,
           useValue: {
-            notify: () => 'success',
+            notify: () => NOTIFIER_TYPES.SUCCESS,
           },
         },
       ],

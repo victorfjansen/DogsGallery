@@ -19,7 +19,7 @@
 
   <home-dogs-showcase
     [showcaseList]="dogShowcaseList"
-    [selectedDog]="dogShowcaseList[0]"
+    [selectedDog]="dogShowcaseList[0] || []"
     [state]="state"
     class="c-home__dog-showcase"
   ></home-dogs-showcase>

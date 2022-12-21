@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
   OnDestroy,
@@ -15,6 +16,7 @@ import { ModalComponent } from 'src/shared/components/modal/modal.component';
   selector: 'dog-modal-template',
   templateUrl: './dog-modal-template.component.html',
   styleUrls: ['./dog-modal-template.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DogModalTemplateComponent implements OnDestroy, OnInit {
   @ViewChild('modal') modal: ModalComponent | undefined;
@@ -24,7 +26,10 @@ export class DogModalTemplateComponent implements OnDestroy, OnInit {
 
   unsubscribe$: Subject<void>;
 
-  constructor(private dogStore: FavoriteDogStore) {
+  constructor(
+    private dogStore: FavoriteDogStore,
+    private changeDetectionRef: ChangeDetectorRef
+  ) {
     this.selectedDog = {
       imageUrl: '',
       lifeSpan: '',
@@ -53,6 +58,7 @@ export class DogModalTemplateComponent implements OnDestroy, OnInit {
   toggleVisibility(dog: DogViewModel): void {
     this.selectedDog = dog;
     this.modal?.toggleVisibility();
+    this.changeDetectionRef.detectChanges();
   }
 
   private handleIsFavorite(dogList: DogViewModel[]): void {

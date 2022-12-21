@@ -4,6 +4,10 @@
   &__container {
     margin-bottom: 48px;
 
+    @include breakpoint("sm") {
+      margin-top: 64px;
+    }
+
     &__header {
       display: flex;
       align-items: center;

@@ -1,11 +1,12 @@
-import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NotifierModule, NotifierService } from 'angular-notifier';
+import { FavoriteDogStoreMock, mockedDog } from 'src/shared';
 
-import { FavoriteDogStore, FavoriteDogStoreMock, mockedDog } from '../../store';
+import { FavoriteDogStore } from '../../store';
+import { NOTIFIER_TYPES } from './../../../app/enums/notify.enum';
 import { FavoriteButtonComponent } from './favorite-dog-button.component';
-import { of } from 'rxjs';
 
 describe('FavoriteButtonComponent', () => {
   let component: FavoriteButtonComponent;
@@ -21,7 +22,7 @@ describe('FavoriteButtonComponent', () => {
         {
           provide: NotifierService,
           useValue: {
-            notify: () => 'success',
+            notify: () => NOTIFIER_TYPES.SUCCESS,
           },
         },
         {

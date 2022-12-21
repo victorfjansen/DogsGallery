@@ -1,9 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { DogAdapter } from 'src/app/adapter';
-import { DogDto } from 'src/app/dto';
-import { DogRequestParams, DogViewModel } from 'src/shared/models';
+import { DogViewModel, DogRequestParams } from '../../../shared';
+import { DogDto } from '../../dto';
+import { DogAdapter } from '../../adapter';
 
 import { BaseService } from '../base/base.service';
 

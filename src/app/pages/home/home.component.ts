@@ -6,9 +6,10 @@ import {
 } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 import { finalize } from 'rxjs';
-import { PageState } from 'src/app/enums';
-import { DogViewModel } from 'src/shared/models';
-import { DogService } from 'src/app/services';
+
+import { DogViewModel } from 'src/shared';
+import { NOTIFIER_TYPES, PageState } from '../../enums';
+import { DogService } from '../../services';
 
 @Component({
   selector: 'app-home',
@@ -45,7 +46,10 @@ export class HomeComponent implements OnInit {
   }
 
   private handleDogSuccess(dogData: DogViewModel[]): void {
-    if (!dogData.length) this.state = PageState.NO_DATA;
+    if (!dogData.length) {
+      this.state = PageState.NO_DATA;
+      return;
+    }
     this.dogShowcaseList = dogData;
     this.state = PageState.DEFAULT;
   }
@@ -53,6 +57,6 @@ export class HomeComponent implements OnInit {
   private handleDogError(error: Error): void {
     this.dogShowcaseList = [];
     this.state = PageState.NO_DATA;
-    this.notifierService.notify('error', error.message);
+    this.notifierService.notify(NOTIFIER_TYPES.ERROR, error.message);
   }
 }

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { DogViewModel } from 'src/shared/models';
+import { DogViewModel } from 'src/shared';
 import { Router } from '@angular/router';
-import { APP_ROUTES, PageState } from 'src/app/enums';
+import { APP_ROUTES, PageState } from '../../../../enums';
 
 @Component({
   selector: 'home-dogs-showcase',
@@ -23,11 +23,15 @@ export class DogsShowcaseComponent {
     this.state = PageState.LOADING;
   }
 
-  protected changeCurrentDog(index: number): void {
+  changeCurrentDog(index: number): void {
     this.selectedDog = this.showcaseList[index];
   }
 
-  protected navigateTo(): void {
+  navigateTo(): void {
     this.router.navigate([APP_ROUTES.ALL_DOGS]);
+  }
+
+  dogTrackBy(_: unknown, dog: DogViewModel): string {
+    return dog.name;
   }
 }

@@ -1,11 +1,18 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import { DogViewModel } from 'src/shared/models';
+
 import { DogModalTemplateComponent } from '../dog-modal-template/dog-modal-template.component';
 
 @Component({
   selector: 'dog-card-component',
   templateUrl: './dog-card.component.html',
   styleUrls: ['./dog-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DogCardComponent {
   @ViewChild('modal') modal: DogModalTemplateComponent | undefined;
@@ -21,7 +28,7 @@ export class DogCardComponent {
     };
   }
 
-  handleOpenModal(dog: DogViewModel): void {
-    this.modal?.toggleVisibility(dog);
+  handleOpenModal(): void {
+    this.modal?.toggleVisibility(this.dogObject);
   }
 }

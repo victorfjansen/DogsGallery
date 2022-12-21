@@ -1,14 +1,17 @@
 <section class="c-dogs-showcase">
   <ng-container [ngSwitch]="state">
     <ng-container *ngSwitchCase="pageState.NO_DATA">
-      <h1>Ops.. Nada foi encontrado</h1>
+      <h1 class="c-dogs-showcase__no-data">Ops.. Nada foi encontrado</h1>
     </ng-container>
 
     <ng-container *ngSwitchCase="pageState.LOADING">
-      <loading-component></loading-component>
+      <loading-component class="c-dogs-showcase__loading"></loading-component>
     </ng-container>
 
-    <div class="c-dogs-showcase__container" *ngSwitchCase="pageState.DEFAULT">
+    <div
+      class="c-dogs-showcase__container c-dogs-showcase__default-content"
+      *ngSwitchCase="pageState.DEFAULT"
+    >
       <div class="c-dogs-showcase__container__header">
         <h3 class="c-dogs-showcase__container__header__title">
           Conheça os nossos dogs mais de perto
@@ -24,7 +27,10 @@
           <snackbar-component
             [dog]="dog"
             (clickEvent)="changeCurrentDog(i)"
-            *ngFor="let dog of showcaseList; let i = index"
+            *ngFor="let dog of showcaseList; let i = index; trackBy: dogTrackBy"
+            [id]="
+              'c-dogs-showcase__container__content__snackbar-container-' + i
+            "
           ></snackbar-component>
         </div>
 

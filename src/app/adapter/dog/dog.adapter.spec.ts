@@ -9,7 +9,6 @@ describe(DogAdapter.name, () => {
 
   it(`${DogAdapter.name} should return a DogViewModel array from Dto`, () => {
     const result = DogAdapter.getDogSnackbarData([mockedDogDto]);
-    console.log(result);
     expect(result).toStrictEqual([
       {
         imageUrl: 'https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg',

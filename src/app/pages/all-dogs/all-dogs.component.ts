@@ -1,8 +1,3 @@
-import { DogRequestParams } from '../../../shared/models/dog-request-params.model';
-import { PaginationOptions } from '../../../shared/models/pagination-options.model';
-import { DogService } from './../../services/dog/dog.service';
-import { DogViewModel } from '../../../shared/models/dog.model';
-import { PageState } from './../../enums/page-state.enum';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -13,6 +8,13 @@ import {
 import { FormControl } from '@angular/forms';
 import { NotifierService } from 'angular-notifier';
 import { finalize, Subject, takeUntil } from 'rxjs';
+
+import { DogRequestParams } from '../../../shared/models/dog-request-params.model';
+import { DogViewModel } from '../../../shared/models/dog.model';
+import { PaginationOptions } from '../../../shared/models/pagination-options.model';
+import { NOTIFIER_TYPES } from './../../enums';
+import { PageState } from './../../enums/page-state.enum';
+import { DogService } from './../../services/dog/dog.service';
 
 @Component({
   selector: 'app-all-dogs',
@@ -111,6 +113,6 @@ export class AllDogsComponent implements OnInit, OnDestroy {
   private handleDogError(error: Error): void {
     this.dogShowcaseList = [];
     this.state = PageState.NO_DATA;
-    this.notifierService.notify('error', error.message);
+    this.notifierService.notify(NOTIFIER_TYPES.ERROR, error.message);
   }
 }

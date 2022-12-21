@@ -19,13 +19,13 @@
       <h1>Ops.. Nenhum dado foi encontrado</h1>
     </div>
 
-    <ng-container *ngSwitchCase="pageState.LOADING" class="c-all-dogs__loading">
-      <loading-component></loading-component>
+    <ng-container *ngSwitchCase="pageState.LOADING">
+      <loading-component class="c-all-dogs__loading"></loading-component>
     </ng-container>
 
     <div class="c-all-dogs__showcase">
       <div
-        class="c-all-dogs__showcase__container"
+        class="c-all-dogs__default-content"
         *ngSwitchCase="pageState.DEFAULT"
       >
         <ng-container *ngIf="nameSearchForm.value; else defaultResult">
@@ -37,15 +37,23 @@
           </div>
 
           <ng-template #templateNameWithData>
-            <div *ngFor="let dog of dogShowcaseByName; trackBy: dogTrackBy">
-              <dog-card-component [dogObject]="dog"></dog-card-component>
+            <div
+              class="c-all-dogs__default-content__search-by-name c-all-dogs__showcase__container"
+            >
+              <div *ngFor="let dog of dogShowcaseByName; trackBy: dogTrackBy">
+                <dog-card-component [dogObject]="dog"></dog-card-component>
+              </div>
             </div>
           </ng-template>
         </ng-container>
 
         <ng-template #defaultResult>
-          <div *ngFor="let dog of dogShowcaseList; trackBy: dogTrackBy">
-            <dog-card-component [dogObject]="dog"></dog-card-component>
+          <div
+            class="c-all-dogs__default-content__default-result c-all-dogs__showcase__container"
+          >
+            <div *ngFor="let dog of dogShowcaseList; trackBy: dogTrackBy">
+              <dog-card-component [dogObject]="dog"></dog-card-component>
+            </div>
           </div>
         </ng-template>
       </div>
@@ -55,6 +63,7 @@
       *ngIf="state === pageState.DEFAULT"
     >
       <paginate-component
+        class="c-all-dogs__pagination-container__component"
         *ngIf="!dogShowcaseByName.length"
         [current]="paginationOptions.current"
         [total]="paginationOptions.total"

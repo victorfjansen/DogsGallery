@@ -1,10 +1,7 @@
 <div class="c-dog-card">
   <img [src]="dogObject.imageUrl" />
   <div class="c-dog-card__text-content">
-    <p
-      class="c-dog-card__text-content__title"
-      (click)="handleOpenModal(dogObject)"
-    >
+    <p class="c-dog-card__text-content__title" (click)="handleOpenModal()">
       {{ dogObject.name }}
     </p>
     <p>Expectativa de vida: {{ dogObject.lifeSpan }}</p>
@@ -16,4 +13,8 @@
   </div>
 </div>
 
-<dog-modal-template #modal [selectedDog]="dogObject"></dog-modal-template>
+<dog-modal-template
+  #modal
+  [selectedDog]="dogObject"
+  class="c-dog-card__modal"
+></dog-modal-template>
