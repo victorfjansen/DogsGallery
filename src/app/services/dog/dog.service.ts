@@ -32,9 +32,7 @@ export class DogService extends BaseService {
       limit: 15,
     };
 
-    const params = parameters
-      ? this.getQueryParams({ ...parameters })
-      : this.getQueryParams(defaultParams);
+    const params = this.getQueryParams(parameters || defaultParams);
 
     // recebe como DTO e transforma em ViewModel pra estabelecer o padrão comum de camelCase e filtrar os dados
     return this.httpClient

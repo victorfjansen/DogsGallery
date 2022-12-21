@@ -5,7 +5,7 @@ export const fadeSlowDown = animation(
     ':enter',
     [
       style({ opacity: 0 }),
-      stagger(200, animate('0.3s', style({ opacity: 1 }))),
+      stagger(50, animate('0.3s', style({ opacity: 1 }))),
     ],
     { optional: true }
   )
