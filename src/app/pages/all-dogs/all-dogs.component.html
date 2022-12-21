@@ -1,5 +1,5 @@
 <main>
-  <section class="c-all-dogs" [ngSwitch]="state">
+  <section class="c-all-dogs" [ngSwitch]="state" @fade-left>
     <h1 class="c-all-dogs__title">Veja todos os dogs aqui!</h1>
 
     <div class="c-all-dogs__filters">
@@ -50,6 +50,7 @@
         <ng-template #defaultResult>
           <div
             class="c-all-dogs__default-content__default-result c-all-dogs__showcase__container"
+            @fade-down
           >
             <div *ngFor="let dog of dogShowcaseList; trackBy: dogTrackBy">
               <dog-card-component [dogObject]="dog"></dog-card-component>

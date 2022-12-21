@@ -1,16 +1,20 @@
 <section class="c-dogs-showcase">
   <ng-container [ngSwitch]="state">
     <ng-container *ngSwitchCase="pageState.NO_DATA">
-      <h1 class="c-dogs-showcase__no-data">Ops.. Nada foi encontrado</h1>
+      <h1 class="c-dogs-showcase__no-data" @fade>Ops.. Nada foi encontrado</h1>
     </ng-container>
 
     <ng-container *ngSwitchCase="pageState.LOADING">
-      <loading-component class="c-dogs-showcase__loading"></loading-component>
+      <loading-component
+        class="c-dogs-showcase__loading"
+        @fade
+      ></loading-component>
     </ng-container>
 
     <div
       class="c-dogs-showcase__container c-dogs-showcase__default-content"
       *ngSwitchCase="pageState.DEFAULT"
+      @fade
     >
       <div class="c-dogs-showcase__container__header">
         <h3 class="c-dogs-showcase__container__header__title">
@@ -34,7 +38,10 @@
           ></snackbar-component>
         </div>
 
-        <div class="c-dogs-showcase__container__content__dog-presentation">
+        <div
+          class="c-dogs-showcase__container__content__dog-presentation"
+          *ngIf="selectedDog"
+        >
           <img [src]="selectedDog.imageUrl" />
           <div
             class="c-dogs-showcase__container__content__dog-presentation__text-content"

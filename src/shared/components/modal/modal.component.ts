@@ -1,8 +1,10 @@
+import { transition, trigger, useAnimation } from '@angular/animations';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
 } from '@angular/core';
+import { fadeSlideIn } from 'src/shared/animations';
 
 //aprensenta componente com o método de OnPush
 @Component({
@@ -10,6 +12,9 @@ import {
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('fade', [transition('void => *', useAnimation(fadeSlideIn))]),
+  ],
 })
 export class ModalComponent {
   visible: boolean;

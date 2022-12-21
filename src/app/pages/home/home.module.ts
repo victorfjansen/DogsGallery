@@ -9,9 +9,9 @@ import {
   YellowButtonModule,
 } from 'src/shared';
 
+import { DogsShowcaseComponent } from './components/dogs-showcase/dogs-showcase.component';
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home.routing.module';
-import { DogsShowcaseComponent } from './components/dogs-showcase/dogs-showcase.component';
 
 @NgModule({
   declarations: [HomeComponent, DogsShowcaseComponent],

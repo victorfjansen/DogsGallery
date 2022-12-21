@@ -1,3 +1,4 @@
+import { transition, trigger, useAnimation } from '@angular/animations';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -6,8 +7,8 @@ import {
 } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 import { finalize } from 'rxjs';
+import { DogViewModel, fadeSlideIn } from 'src/shared';
 
-import { DogViewModel } from 'src/shared';
 import { NOTIFIER_TYPES, PageState } from '../../enums';
 import { DogService } from '../../services';
 
@@ -17,6 +18,9 @@ import { DogService } from '../../services';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('fade', [transition('void => *', useAnimation(fadeSlideIn))]),
+  ],
 })
 export class HomeComponent implements OnInit {
   state: PageState;

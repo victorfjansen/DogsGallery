@@ -1,3 +1,4 @@
+import { transition, trigger, useAnimation } from '@angular/animations';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -8,7 +9,13 @@ import {
 import { FormControl } from '@angular/forms';
 import { NotifierService } from 'angular-notifier';
 import { finalize, Subject, takeUntil } from 'rxjs';
-import { DogRequestParams, DogViewModel, PaginationOptions } from 'src/shared';
+import {
+  DogRequestParams,
+  DogViewModel,
+  fadeSlideIn,
+  fadeSlowDown,
+  PaginationOptions,
+} from 'src/shared';
 
 import { NOTIFIER_TYPES } from './../../enums';
 import { PageState } from './../../enums/page-state.enum';
@@ -19,6 +26,10 @@ import { DogService } from './../../services/dog/dog.service';
   templateUrl: './all-dogs.component.html',
   styleUrls: ['./all-dogs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('fade-down', [transition('void => *', useAnimation(fadeSlowDown))]),
+    trigger('fade-left', [transition('void => *', useAnimation(fadeSlideIn))]),
+  ],
 })
 export class AllDogsComponent implements OnInit, OnDestroy {
   //define as instâncias do componente

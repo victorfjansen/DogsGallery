@@ -36,7 +36,7 @@
 
   @include breakpoint("md") {
     &__container {
-      margin-top: 96px;
+      margin-top: 48px;
       flex-direction: column;
       text-align: center;
 
@@ -51,7 +51,7 @@
       }
 
       &__dog-image {
-        margin-top: 96px;
+        margin-top: 48px;
       }
     }
 

@@ -1,6 +1,8 @@
 <ng-container *ngIf="visible">
   <div class="c-modal__component">
-    <ng-content></ng-content>
+    <div @fade>
+      <ng-content></ng-content>
+    </div>
   </div>
   <div (click)="toggleVisibility()" class="c-modal__overlay"></div>
 </ng-container>

@@ -1,6 +1,13 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { DogViewModel } from 'src/shared';
+import { transition, trigger, useAnimation } from '@angular/animations';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+} from '@angular/core';
 import { Router } from '@angular/router';
+import { DogViewModel, fadeSlideIn } from 'src/shared';
+
 import { APP_ROUTES, PageState } from '../../../../enums';
 
 @Component({
@@ -8,6 +15,9 @@ import { APP_ROUTES, PageState } from '../../../../enums';
   templateUrl: './dogs-showcase.component.html',
   styleUrls: ['./dogs-showcase.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('fade', [transition('* => *', useAnimation(fadeSlideIn))]),
+  ],
 })
 export class DogsShowcaseComponent {
   // recebe propriedades via input property
@@ -17,7 +27,10 @@ export class DogsShowcaseComponent {
 
   pageState: typeof PageState;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {
     // define valores pras intancias
     this.showcaseList = [];
     this.selectedDog = this.showcaseList[0] || [];
@@ -28,6 +41,7 @@ export class DogsShowcaseComponent {
   // define o dog selecionado a partir da lista que já existe
   changeCurrentDog(index: number): void {
     this.selectedDog = this.showcaseList[index];
+    this.changeDetectorRef.detectChanges();
   }
 
   //navega pra outra rota
