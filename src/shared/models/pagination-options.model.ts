@@ -1,4 +1,5 @@
 export interface PaginationOptions {
-  current: number;
-  total: number;
+  current?: number;
+  total?: number;
+  limit?: number;
 }

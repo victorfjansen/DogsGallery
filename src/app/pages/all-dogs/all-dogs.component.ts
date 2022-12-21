@@ -89,7 +89,7 @@ export class AllDogsComponent implements OnInit, OnDestroy {
     this.nameSearchForm.valueChanges
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe({
-        next: this.filterByName.bind(this),
+        next: this.handleFilterNameChanges.bind(this),
       });
   }
 
@@ -99,17 +99,33 @@ export class AllDogsComponent implements OnInit, OnDestroy {
   }
 
   // lógica pra filtrar pelo nome e adicionar num novo array
+  private handleFilterNameChanges(value: string): void {
+    !(this.dogShowcaseList.length > 20) && this.getDogList({ limit: 160 });
+    !value.length && this.resetShowCase();
+
+    this.dogShowcaseList.length > 20 && this.filterByName(value);
+  }
+
+  private resetShowCase(): void {
+    this.dogShowcaseByName = [];
+    this.getDogList();
+  }
+
   private filterByName(value: string): void {
-    this.dogShowcaseByName = this.dogShowcaseList.filter((dog) =>
-      this.trimString(dog.name).includes(this.trimString(value))
-    );
-    if (!value.length) this.dogShowcaseByName = [];
+    if (this.dogShowcaseList.length > 20) {
+      this.dogShowcaseByName = this.dogShowcaseList.filter((dog) =>
+        this.trimString(dog.name).includes(this.trimString(value))
+      );
+    }
   }
 
   // pega a LISTA de dogs administrando os parâmetros que vierem
-  private getDogList(paginationOptions: PaginationOptions): void {
+  private getDogList(paginationOptions?: PaginationOptions): void {
     const params: DogRequestParams | undefined = paginationOptions
-      ? { page: paginationOptions.current, limit: 15 }
+      ? {
+          page: paginationOptions.current,
+          limit: paginationOptions.limit || 15,
+        }
       : undefined;
 
     this.state = PageState.LOADING;

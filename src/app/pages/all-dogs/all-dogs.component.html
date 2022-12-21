@@ -66,8 +66,8 @@
       <paginate-component
         class="c-all-dogs__pagination-container__component"
         *ngIf="!dogShowcaseByName.length"
-        [current]="paginationOptions.current"
-        [total]="paginationOptions.total"
+        [current]="paginationOptions.current!"
+        [total]="paginationOptions.total!"
         (changePageEvent)="handleChangePage($event)"
       ></paginate-component>
     </div>
