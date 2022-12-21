@@ -15,10 +15,11 @@ import { DogModalTemplateComponent } from '../dog-modal-template/dog-modal-templ
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DogCardComponent {
-  @ViewChild('modal') modal: DogModalTemplateComponent | undefined;
+  //cria instancias do componente
   @Input() dogObject: DogViewModel;
 
   constructor() {
+    // define valores default pras intancias
     this.dogObject = {
       imageUrl: '',
       lifeSpan: '',
@@ -26,9 +27,5 @@ export class DogCardComponent {
       origin: '',
       temperament: '',
     };
-  }
-
-  handleOpenModal(): void {
-    this.modal?.toggleVisibility(this.dogObject);
   }
 }

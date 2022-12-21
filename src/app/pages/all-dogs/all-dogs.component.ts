@@ -8,10 +8,8 @@ import {
 import { FormControl } from '@angular/forms';
 import { NotifierService } from 'angular-notifier';
 import { finalize, Subject, takeUntil } from 'rxjs';
+import { DogRequestParams, DogViewModel, PaginationOptions } from 'src/shared';
 
-import { DogRequestParams } from '../../../shared/models/dog-request-params.model';
-import { DogViewModel } from '../../../shared/models/dog.model';
-import { PaginationOptions } from '../../../shared/models/pagination-options.model';
 import { NOTIFIER_TYPES } from './../../enums';
 import { PageState } from './../../enums/page-state.enum';
 import { DogService } from './../../services/dog/dog.service';
@@ -23,6 +21,7 @@ import { DogService } from './../../services/dog/dog.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AllDogsComponent implements OnInit, OnDestroy {
+  //define as instâncias do componente
   state: PageState;
   pageState: typeof PageState;
 
@@ -39,6 +38,7 @@ export class AllDogsComponent implements OnInit, OnDestroy {
     private notifierService: NotifierService,
     private changeDetectorRef: ChangeDetectorRef
   ) {
+    //cria valores pras intancias
     this.state = PageState.LOADING;
     this.dogShowcaseList = [];
     this.dogShowcaseByName = [];
@@ -51,6 +51,7 @@ export class AllDogsComponent implements OnInit, OnDestroy {
     this.unsubscribe$ = new Subject();
   }
 
+  // quando iniciar, pega a lista de dogs existentes com as opções de paginação padrões
   ngOnInit(): void {
     this.getDogList(this.paginationOptions);
     this.handleNameSearch();
@@ -61,15 +62,18 @@ export class AllDogsComponent implements OnInit, OnDestroy {
     this.unsubscribe$.complete();
   }
 
+  // define o trackBy dos dogs pra evitar perda na memória de itens já renderizados
   dogTrackBy(_: number, dog: DogViewModel): string {
     return dog.name;
   }
 
+  // se a paginação mudar, vai fazer uma nova request com os novos dados
   handleChangePage(event: number): void {
     this.paginationOptions.current = event;
     this.getDogList(this.paginationOptions);
   }
 
+  //cria uma subinscrição pro campo de pesquisa e monitora as alterações. Dado isso, chama a função pra filtrar com os dados já existentes
   private handleNameSearch(): void {
     this.nameSearchForm.valueChanges
       .pipe(takeUntil(this.unsubscribe$))
@@ -78,10 +82,12 @@ export class AllDogsComponent implements OnInit, OnDestroy {
       });
   }
 
+  // coloca em lowerCase e tira os espaços
   private trimString(value: string): string {
     return value.toLowerCase().trim();
   }
 
+  // lógica pra filtrar pelo nome e adicionar num novo array
   private filterByName(value: string): void {
     this.dogShowcaseByName = this.dogShowcaseList.filter((dog) =>
       this.trimString(dog.name).includes(this.trimString(value))
@@ -89,6 +95,7 @@ export class AllDogsComponent implements OnInit, OnDestroy {
     if (!value.length) this.dogShowcaseByName = [];
   }
 
+  // pega a lsita de dogs administrando os parâmetros que vierem
   private getDogList(paginationOptions: PaginationOptions): void {
     const params: DogRequestParams | undefined = paginationOptions
       ? { page: paginationOptions.current, limit: 15 }
@@ -104,12 +111,14 @@ export class AllDogsComponent implements OnInit, OnDestroy {
       });
   }
 
+  // caso a lista venha com sucesso, coloca no default ou no no-data
   private handleDogSuccess(dogData: DogViewModel[]): void {
     if (!dogData.length) this.state = PageState.NO_DATA;
     this.dogShowcaseList = dogData;
     this.state = PageState.DEFAULT;
   }
 
+  // caso de erro, coloca no no-data e informa o usuário
   private handleDogError(error: Error): void {
     this.dogShowcaseList = [];
     this.state = PageState.NO_DATA;

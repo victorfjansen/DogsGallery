@@ -38,7 +38,6 @@ describe('DogCardComponent', () => {
   });
 
   it(`${DogCardComponent.name} should have defined properties when initializes`, () => {
-    expect(component.modal).toBeDefined();
     expect(component.dogObject).toBeDefined();
   });
 

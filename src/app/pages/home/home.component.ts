@@ -11,6 +11,7 @@ import { DogViewModel } from 'src/shared';
 import { NOTIFIER_TYPES, PageState } from '../../enums';
 import { DogService } from '../../services';
 
+//apresenta o componente no método OnPush
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -20,7 +21,7 @@ import { DogService } from '../../services';
 export class HomeComponent implements OnInit {
   state: PageState;
   dogShowcaseList: DogViewModel[];
-
+  //define instancias do componente
   constructor(
     private dogService: DogService,
     private notifierService: NotifierService,
@@ -30,10 +31,12 @@ export class HomeComponent implements OnInit {
     this.dogShowcaseList = [];
   }
 
+  //quando inicializar, chama função pra pegar a lsita de dogs formatada
   ngOnInit(): void {
     this.getDogList();
   }
 
+  // seta como loading enquanto não finalizar e chama o serviço
   private getDogList(): void {
     this.state = PageState.LOADING;
     this.dogService
@@ -45,6 +48,7 @@ export class HomeComponent implements OnInit {
       });
   }
 
+  //caso tenha sucesso, define como DEFAULT
   private handleDogSuccess(dogData: DogViewModel[]): void {
     if (!dogData.length) {
       this.state = PageState.NO_DATA;
@@ -54,6 +58,7 @@ export class HomeComponent implements OnInit {
     this.state = PageState.DEFAULT;
   }
 
+  //caso de erro, notifica e define como nenhum dado
   private handleDogError(error: Error): void {
     this.dogShowcaseList = [];
     this.state = PageState.NO_DATA;

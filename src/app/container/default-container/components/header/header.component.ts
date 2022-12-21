@@ -7,6 +7,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
+  //função que administra o tema da aplicação. Vinculado ao input.
   switchTheme(event: Event): void {
     document.documentElement.setAttribute(
       'data-theme',

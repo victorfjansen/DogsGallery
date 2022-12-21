@@ -1,7 +1,10 @@
 <div class="c-dog-card">
   <img [src]="dogObject.imageUrl" />
   <div class="c-dog-card__text-content">
-    <p class="c-dog-card__text-content__title" (click)="handleOpenModal()">
+    <p
+      class="c-dog-card__text-content__title"
+      (click)="modal?.toggleVisibility(this.dogObject)"
+    >
       {{ dogObject.name }}
     </p>
     <p>Expectativa de vida: {{ dogObject.lifeSpan }}</p>
