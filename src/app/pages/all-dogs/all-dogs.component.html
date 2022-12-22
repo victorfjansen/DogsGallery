@@ -61,7 +61,7 @@
     </div>
     <div
       class="c-all-dogs__pagination-container"
-      *ngIf="state === pageState.DEFAULT"
+      *ngIf="state === pageState.DEFAULT && !nameSearchForm.value"
     >
       <paginate-component
         class="c-all-dogs__pagination-container__component"

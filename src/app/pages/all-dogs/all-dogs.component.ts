@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { NotifierService } from 'angular-notifier';
-import { finalize, Subject, takeUntil } from 'rxjs';
+import { debounceTime, finalize, Subject, takeUntil, tap } from 'rxjs';
 import {
   DogRequestParams,
   DogViewModel,
@@ -49,7 +49,7 @@ export class AllDogsComponent implements OnInit, OnDestroy {
     private notifierService: NotifierService,
     private changeDetectorRef: ChangeDetectorRef
   ) {
-    //cria valores pras intancias
+    //cria valores pras instancias
     this.state = PageState.LOADING;
     this.dogShowcaseList = [];
     this.dogShowcaseByName = [];
@@ -87,9 +87,13 @@ export class AllDogsComponent implements OnInit, OnDestroy {
   //cria uma subinscrição pro campo de pesquisa e monitora as alterações. Dado isso, chama a função pra filtrar com os dados já existentes
   private handleNameSearch(): void {
     this.nameSearchForm.valueChanges
-      .pipe(takeUntil(this.unsubscribe$))
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        tap(() => (this.state = PageState.LOADING)),
+        debounceTime(800)
+      )
       .subscribe({
-        next: this.handleFilterNameChanges.bind(this),
+        next: () => this.handleFilterNameChanges(),
       });
   }
 
@@ -98,25 +102,34 @@ export class AllDogsComponent implements OnInit, OnDestroy {
     return value.toLowerCase().trim();
   }
 
-  // lógica pra filtrar pelo nome e adicionar num novo array
-  private handleFilterNameChanges(value: string): void {
+  // Caso não tenha a lista completa dos dogs, faz a request
+  // caso o form não tenha nenhum dado, faz a request
+  // caso tenha dados e esteja tentando filtrar normalmente, filtra os dados
+  private handleFilterNameChanges(): void {
     !(this.dogShowcaseList.length > 20) && this.getDogList({ limit: 160 });
-    this.dogShowcaseList.length > 20 && this.filterByName(value);
+    if (!this.nameSearchForm.value.length) {
+      this.resetShowCase();
+      return;
+    }
 
-    !value.length && this.resetShowCase();
+    this.dogShowcaseList.length > 20 && this.filterDogs();
   }
 
+  // reseta showcase pra estado inicial e faz nova request. Assim, o template default é renderizado com os dados de paginação normal.
   private resetShowCase(): void {
     this.dogShowcaseByName = [];
     this.getDogList();
   }
 
-  private filterByName(value: string): void {
-    if (this.dogShowcaseList.length > 20) {
-      this.dogShowcaseByName = this.dogShowcaseList.filter((dog) =>
-        this.trimString(dog.name).includes(this.trimString(value))
-      );
-    }
+  //filtra os dogs pelo nome, define state como default e renderiza componente
+  private filterDogs(): void {
+    this.dogShowcaseByName = this.dogShowcaseList.filter((dog) =>
+      this.trimString(dog.name).includes(
+        this.trimString(this.nameSearchForm.value)
+      )
+    );
+    this.state = PageState.DEFAULT;
+    this.changeDetectorRef.detectChanges();
   }
 
   // pega a LISTA de dogs administrando os parâmetros que vierem
@@ -138,11 +151,13 @@ export class AllDogsComponent implements OnInit, OnDestroy {
       });
   }
 
-  // caso a lista venha com sucesso, coloca no default ou no no-data
+  // caso a lista venha com sucesso, coloca no default ou no no-data, renderiza o componente e verifica se tem algum valor no form. Se tiver valores no form, chama o filtro por nome
   private handleDogSuccess(dogData: DogViewModel[]): void {
     if (!dogData.length) this.state = PageState.NO_DATA;
     this.dogShowcaseList = dogData;
     this.state = PageState.DEFAULT;
+    this.changeDetectorRef.detectChanges();
+    this.nameSearchForm.value && this.handleFilterNameChanges();
   }
 
   // caso de erro, coloca no no-data e informa o usuário
