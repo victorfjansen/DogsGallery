@@ -106,7 +106,7 @@ export class AllDogsComponent implements OnInit, OnDestroy {
   // caso o form não tenha nenhum dado, faz a request
   // caso tenha dados e esteja tentando filtrar normalmente, filtra os dados
   private handleFilterNameChanges(): void {
-    !(this.dogShowcaseList.length > 20) && this.getDogList({ limit: 160 });
+    !(this.dogShowcaseList.length > 20) && this.getDogList({ limit: 200 });
     if (!this.nameSearchForm.value.length) {
       this.resetShowCase();
       return;
