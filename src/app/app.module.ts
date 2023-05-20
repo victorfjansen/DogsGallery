@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { DefaultContainerModule } from './container/default-container/default-container.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgMixpanelModule } from 'src/shared/lib/mixpanel/src/ng-mixpanel.module';
+import { DEFAULT_MIXPANEL_URI, MIXPANEL_TOKEN } from './config';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +20,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DefaultContainerModule,
     NotifierModule,
     FontAwesomeModule,
+    NgMixpanelModule.forRoot(
+      MIXPANEL_TOKEN,
+      'i2313',
+      DEFAULT_MIXPANEL_URI,
+      true
+    ),
   ],
   bootstrap: [AppComponent],
 })
