@@ -7,6 +7,5 @@ export const NG_MIXPANEL_SETTINGS_TOKEN =
       projectToken: '',
       userId: '',
       debugMode: false,
-      uri: '',
     }),
   });

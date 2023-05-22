@@ -3,6 +3,9 @@
   <div class="c-dog-card__text-content">
     <p
       class="c-dog-card__text-content__title"
+      mixpanelTrigger
+      [eventId]="'click-on-' + dogObject.name"
+      [eventTrackData]="dogObject"
       (click)="modal?.toggleVisibility(this.dogObject)"
     >
       {{ dogObject.name }}

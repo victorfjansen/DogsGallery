@@ -1,3 +1,3 @@
 export interface MixpanelInstanceViewModel {
-  track: () => void;
+  track: (eventId: string, mixpanelData: unknown) => void;
 }

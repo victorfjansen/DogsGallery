@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NotifierModule } from 'angular-notifier';
+import { NgMixpanelModule } from 'src/shared/lib/mixpanel/src/ng-mixpanel.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MIXPANEL_TOKEN } from './config';
 import { DefaultContainerModule } from './container/default-container/default-container.module';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgMixpanelModule } from 'src/shared/lib/mixpanel/src/ng-mixpanel.module';
-import { DEFAULT_MIXPANEL_URI, MIXPANEL_TOKEN } from './config';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,11 +22,10 @@ import { DEFAULT_MIXPANEL_URI, MIXPANEL_TOKEN } from './config';
     FontAwesomeModule,
     NgMixpanelModule.forRoot(
       MIXPANEL_TOKEN,
-      'i2313',
-      DEFAULT_MIXPANEL_URI,
+      'userId',
       true
     ),
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

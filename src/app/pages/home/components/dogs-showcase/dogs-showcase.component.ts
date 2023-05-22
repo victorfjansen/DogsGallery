@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { DogViewModel, fadeSlideIn } from 'src/shared';
 
 import { APP_ROUTES, PageState } from '../../../../enums';
+import { MixpanelTrackService } from 'src/shared/lib/mixpanel/src/services/mixpanel-track.service';
 
 @Component({
   selector: 'home-dogs-showcase',
@@ -29,7 +30,8 @@ export class DogsShowcaseComponent {
 
   constructor(
     private router: Router,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private mixpanelService: MixpanelTrackService
   ) {
     // define valores pras intancias
     this.showcaseList = [];
@@ -46,6 +48,7 @@ export class DogsShowcaseComponent {
 
   //navega pra outra rota
   navigateTo(): void {
+    this.mixpanelService.track('meu-teste')
     this.router.navigate([APP_ROUTES.ALL_DOGS]);
   }
 

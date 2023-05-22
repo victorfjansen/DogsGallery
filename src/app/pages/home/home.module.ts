@@ -26,4 +26,4 @@ import { HomeRoutingModule } from './home.routing.module';
   ],
   providers: [DogService],
 })
-export class HomeModule {}
+export class HomeModule { }

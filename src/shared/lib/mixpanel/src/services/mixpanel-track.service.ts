@@ -1,13 +1,14 @@
-import { Injectable } from '@angular/core';
-import { MixpanelInstanceViewModel } from '../models/mixpanel-instance.model';
+import { Inject, Injectable } from '@angular/core';
 
-@Injectable({ providedIn: 'root' })
+import { MixpanelSettingsViewModel } from '../models/mixpanel-settings.model';
+import { NG_MIXPANEL_SETTINGS_TOKEN } from '../tokens/ng-mixpanel-settings.token';
+import * as mixpanel from 'mixpanel-browser'
+
+@Injectable()
 export class MixpanelTrackService {
-  private mixpanelInstance: MixpanelInstanceViewModel = {
-    track: () => null,
-  };
+  constructor(@Inject(NG_MIXPANEL_SETTINGS_TOKEN) private settings: MixpanelSettingsViewModel) { }
 
-  defineMixpanelInstance(mixpanel: MixpanelInstanceViewModel): void {
-    this.mixpanelInstance = mixpanel;
+  track(eventId: string, trackData?: unknown): void {
+    mixpanel.track(eventId, { ...trackData as Object, userId: this.settings.userId });
   }
 }
