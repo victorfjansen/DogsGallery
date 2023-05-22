@@ -8,16 +8,13 @@ import {
   SimpleChanges,
 } from '@angular/core';
 
-//apresenta componente com o método OnPush para renderizar somente quando as propriedades de input forem alteradas
 @Component({
   selector: 'paginate-component',
   templateUrl: './paginate.component.html',
   styleUrls: ['./paginate.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-//implementa o onChanges pra verificar todas as mudanças relativas a ele e renderizar quando houverem mudanças
 export class PaginateComponent implements OnChanges {
-  //declara instancias de entrada e saída
   @Input() current: number;
   @Input() total: number;
 
@@ -26,7 +23,6 @@ export class PaginateComponent implements OnChanges {
   pages: number[] = [];
 
   constructor() {
-    //declara valores default pra cada instancia
     this.current = 0;
     this.total = 0;
     this.pages = [];
@@ -34,7 +30,6 @@ export class PaginateComponent implements OnChanges {
     this.changePageEvent = new EventEmitter();
   }
 
-  //ativa o ciclo de detecção pra quando houver mudança nas propriedades input ele recalcular a quantidade de páginas disponíveis
   ngOnChanges(changes: SimpleChanges): void {
     if (
       (changes['current'] && changes['current'].currentValue) ||
@@ -44,7 +39,6 @@ export class PaginateComponent implements OnChanges {
     }
   }
 
-  // logica pra conseguir pegar as paginas disponiveis a partir do numero total de paginas passadas e da pagina atual
   private getPages(current: number, total: number): number[] {
     if (total <= 7) {
       return [...Array(total).keys()].map((x) => ++x);

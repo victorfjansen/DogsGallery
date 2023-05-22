@@ -1,12 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  ViewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { DogViewModel } from 'src/shared/models';
-
-import { DogModalTemplateComponent } from '../dog-modal-template/dog-modal-template.component';
 
 @Component({
   selector: 'dog-card-component',
@@ -15,11 +8,9 @@ import { DogModalTemplateComponent } from '../dog-modal-template/dog-modal-templ
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DogCardComponent {
-  //cria instancias do componente
   @Input() dogObject: DogViewModel;
 
   constructor() {
-    // define valores default pras intancias
     this.dogObject = {
       imageUrl: '',
       lifeSpan: '',

@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { DefaultContainerComponent } from './container/default-container/default-container.component';
 import { APP_ROUTES } from './enums';
 
-// define um container global pra aplicação e define os childrens dessa aplicação carregados com o lazy load
 const routes: Routes = [
   {
     path: '',
@@ -33,4 +32,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

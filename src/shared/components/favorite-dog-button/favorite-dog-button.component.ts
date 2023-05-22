@@ -20,10 +20,8 @@ import { FavoriteDogStore } from '../../store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FavoriteButtonComponent implements OnDestroy, OnChanges {
-  //cria instancias e define o DOG pra ser recebido como input property
   @Input() dog: DogViewModel;
 
-  //o faHeart é do fontAwesome
   faHeart: typeof faHeart;
   isDogFavorite: boolean;
 
@@ -47,25 +45,21 @@ export class FavoriteButtonComponent implements OnDestroy, OnChanges {
     this.unsubscribe$ = new Subject();
   }
 
-  //toda vez que houver alteração, vai verificar se é favorito pra poder renderizar como vermelho
   ngOnChanges(): void {
     this.verifyIsDogFavorite();
   }
 
-  // finaliza a inscrição
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
 
-  // verifica o estado atual do componente pra poder decidir se vai remover dos favoritos ou adicionar dos favoritos
   toggleFavoriteState(): void {
     this.isDogFavorite
       ? this.dogStore.removeFavoriteDog(this.dog.name)
       : this.setFavoriteDog();
   }
 
-  // define o dog como favorito (chamando a store) e notifica ao usuário
   private setFavoriteDog(): void {
     this.dogStore.setFavoriteDog(this.dog);
     this.notifierService.notify(
@@ -74,7 +68,6 @@ export class FavoriteButtonComponent implements OnDestroy, OnChanges {
     );
   }
 
-  //pega na store a lista de dogs e verifica se o dog recebido pela input property faz parte dela
   private verifyIsDogFavorite(): void {
     this.dogStore
       .getFavoriteDogList()

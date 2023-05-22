@@ -6,6 +6,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./loading.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoadingComponent {}
+export class LoadingComponent { }
 
-//apenas um componente de Loading, CSS puro
