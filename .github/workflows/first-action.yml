@@ -1,17 +1,13 @@
-name: Run Tests
+name: Run tests
 on: push
 jobs:
   run-tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      
-      - name: download nodejs
-        run: npm i
-        
-      - name: run tests
-        run: npm run test
+      - name: Aqui
+        run: echo "haha"
+  run-something:
+    runs-on: ubuntu-latest
+    steps:
+      - name: haha
+        run: echo "asodjsn"
