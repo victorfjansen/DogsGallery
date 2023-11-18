@@ -6,7 +6,7 @@ export class DogAdapter {
     return [...dogDto].map((dog) => {
       return {
         name: dog.name,
-        imageUrl: dog.image.url,
+        imageUrl: dog?.image?.url,
         origin: dog.origin,
         lifeSpan: dog.life_span,
         temperament: dog.temperament,

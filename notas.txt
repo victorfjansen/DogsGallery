@@ -1,0 +1,6 @@
+Sobre o RouteReuseStrategy:
+
+- Temos que lembrar que o angular usa uma estrutura de arvore binária
+- A cada nível da rota, ele ativa uma detecção
+- Se estiver com lazyloading, vai interferir -> 2 renderizações
+- AppComponent -> Router Outlet vai interferir -> Um Aponta pro appComponent e o outro para o componente em sí -> olhar o root

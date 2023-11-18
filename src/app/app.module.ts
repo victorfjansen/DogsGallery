@@ -9,10 +9,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MIXPANEL_TOKEN } from './config';
 import { DefaultContainerModule } from './container/default-container/default-container.module';
+import { RouteReuseStrategy } from '@angular/router';
+import { RouteReuseService } from 'src/shared/services/reuse-route-strategy.service';
+import { AllDogsComponent } from './pages/all-dogs/all-dogs.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FavoriteButtonModule, LoadingModule, ModalModule, PaginateModule } from 'src/shared';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DogCardComponent } from './pages/all-dogs/components/dog-card/dog-card.component';
+import { DogModalTemplateComponent } from './pages/all-dogs/components/dog-modal-template/dog-modal-template.component';
+import { DogService } from './services';
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, DogModalTemplateComponent, DogCardComponent, AllDogsComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -25,6 +34,21 @@ import { DefaultContainerModule } from './container/default-container/default-co
       'userId',
       true
     ),
+
+    HttpClientModule,
+    NgMixpanelModule.forChild(),
+    LoadingModule,
+    ReactiveFormsModule,
+    PaginateModule,
+    ModalModule,
+    FavoriteButtonModule,
+  ],
+  providers: [
+    {
+      provide: RouteReuseStrategy,
+      useClass: RouteReuseService
+    },
+    DogService
   ],
   bootstrap: [AppComponent],
 })

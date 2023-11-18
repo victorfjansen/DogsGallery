@@ -18,7 +18,7 @@ import { MpEventTriggerDirective } from 'src/shared/lib/mixpanel/src/directives/
 import { NgMixpanelModule } from 'src/shared/lib/mixpanel/src/ng-mixpanel.module';
 
 @NgModule({
-  declarations: [AllDogsComponent, DogCardComponent, DogModalTemplateComponent],
+  declarations: [],
   imports: [
     CommonModule,
     AllDogsRoutingModule,
@@ -31,5 +31,6 @@ import { NgMixpanelModule } from 'src/shared/lib/mixpanel/src/ng-mixpanel.module
     FavoriteButtonModule,
   ],
   providers: [DogService],
+  exports: [AllDogsComponent]
 })
 export class AllDogsModule { }

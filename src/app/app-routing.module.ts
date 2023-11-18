@@ -2,8 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DefaultContainerComponent } from './container/default-container/default-container.component';
 import { APP_ROUTES } from './enums';
+import { AllDogsComponent } from './pages/all-dogs/all-dogs.component';
 
 const routes: Routes = [
+  {
+    path: APP_ROUTES.ALL_DOGS,
+    component: AllDogsComponent
+  },
   {
     path: '',
     component: DefaultContainerComponent,
@@ -13,13 +18,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/home/home.module').then((m) => m.HomeModule),
       },
-      {
-        path: APP_ROUTES.ALL_DOGS,
-        loadChildren: () =>
-          import('./pages/all-dogs/all-dogs.module').then(
-            (m) => m.AllDogsModule
-          ),
-      },
+
       {
         path: '**',
         redirectTo: APP_ROUTES.HOME,
